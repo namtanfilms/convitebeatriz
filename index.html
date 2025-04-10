@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noite de Cinema</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-image: url('Purple Vintage Illustrative Movie Night Poster (3).png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .botao {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 16px;
+      background-color: #fff;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .botao:hover {
+      background-color: #f0f0f0;
+    }
+
+    .popup, .convite {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content, .convite-content {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 90%;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .popup img, .convite img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+    }
+
+    .convite-animado {
+      animation: zoomIn 1s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="botao" onclick="respostaNao()">NÃO</button>
+  <button class="botao" onclick="respostaSim()">SIM</button>
+
+  <!-- POPUP ERRO -->
+  <div class="popup" id="popupErro">
+    <div class="popup-content">
+      <p><strong>RESPOSTA ERRADA!</strong></p>
+      <button class="botao" onclick="voltar()">TENTE NOVAMENTE</button>
+    </div>
+  </div>
+
+  <!-- POPUP SEGUNDA IMAGEM -->
+  <div class="popup" id="popupSim">
+    <div class="popup-content" style="background-image: url('Purple Vintage Illustrative Movie Night Poster (1).png'); background-size: cover; background-position: center;">
+      <button class="botao" onclick="abrirConvite()">QUAL FILME IREMOS ASSISTIR?</button>
+    </div>
+  </div>
+
+  <!-- POPUP CONVITE -->
+  <div class="popup convite" id="popupConvite">
+    <div class="convite-content" style="background-image: url('Purple Vintage Illustrative Movie Night Poster (2).png'); background-size: cover; background-position: center;">
+      <div class="convite-animado">
+        <img src="https://cdn.ome.lt/UTQSchcOLxQ2BR7-KvvJSqUcIuQ=/987x0/smart/uploads/conteudo/fotos/blackmirror-hotelreverie-capa.png" alt="Convite">
+      </div>
+      <br>
+      <button class="botao" onclick="confirmarPresenca()">CONFIRMO PRESENÇA</button>
+    </div>
+  </div>
+
+  <!-- POPUP FINAL -->
+  <div class="popup" id="popupFinal">
+    <div class="popup-content">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLkQd6mLg_orogBCC1taWgDLyuotgxeJImqQ&s" alt="Final">
+      <p style="margin-top: 15px;"><strong>TE AGUARDO NA NOSSA SESSÃO, MEU AMOR!</strong></p>
+    </div>
+  </div>
+
+  <script>
+    function respostaNao() {
+      document.getElementById('popupErro').style.display = 'flex';
+    }
+
+    function respostaSim() {
+      document.getElementById('popupSim').style.display = 'flex';
+    }
+
+    function voltar() {
+      document.getElementById('popupErro').style.display = 'none';
+    }
+
+    function abrirConvite() {
+      document.getElementById('popupSim').style.display = 'none';
+      document.getElementById('popupConvite').style.display = 'flex';
+    }
+
+    function confirmarPresenca() {
+      document.getElementById('popupConvite').style.display = 'none';
+      document.getElementById('popupFinal').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
